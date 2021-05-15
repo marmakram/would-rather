@@ -1,0 +1,4 @@
+export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const AUTH_USER = 'AUTH_USER';
+export const ADD_USER_QUESTION = 'ADD_USER_QUESTION';
+export const ANSWER_QUESTION = 'ANSWER_QUESTION';
