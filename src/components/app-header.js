@@ -2,17 +2,10 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
-import { Redirect, Link  } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { AUTH_USER } from '../constants';
 
 class AppHeader extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            currUser: props.currUser
-        }
-    }
 
     logoutHandler() {
         this.props.dispatch({
@@ -25,28 +18,29 @@ class AppHeader extends React.Component {
         debugger
     }
     render() {
+        console.log(this.props.currUser);
         return (
             <div>
                 <Navbar bg="light" expand="lg">
                     {
-                    this.state.currUser && (<Navbar.Brand >
-                        {/* <img src={ require(this.state.currUser.avatarURL) } /> */}
-                        <div className="img" onError={(e)=> this.errorImg(e)} style={{
-                            backgroundImage: 'url("' + this.state.currUser.avatarURL + '")'
-                        }}>
-                            {/* <img className="img" src='../images/img_avatar.png' /> */}
-                        </div>
+                        this.props && this.props.currUser && (<Navbar.Brand >
+                            {/* <img src={ require(this.props.currUser.avatarURL) } /> */}
+                            <div className="img" onError={(e) => this.errorImg(e)} style={{
+                                backgroundImage: 'url("' + this.props.currUser.avatarURL + '")'
+                            }}>
+                                {/* <img className="img" src='../images/img_avatar.png' /> */}
+                            </div>
                         </Navbar.Brand>
                         )}
-                    {this.state.currUser && (<Navbar.Brand>{this.state.currUser.name}</Navbar.Brand>)}
+                    {this.props && this.props.currUser && (<Navbar.Brand>{this.props.currUser.name}</Navbar.Brand>)}
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link as={Link} to='/'>Leaderboard</Nav.Link>
-                            <Nav.Link as={Link} to="/question/add">New Question</Nav.Link>
+                            <Nav.Link as={Link} to="/add">New Question</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
-                    {this.state.currUser ? <Nav.Link onClick={() => this.logoutHandler()}>logout</Nav.Link> : <Nav.Link href='/login'>Login</Nav.Link>}
+                    {this.props.currUser ? <Nav.Link onClick={() => this.logoutHandler()}>logout</Nav.Link> : <Nav.Link href='/login'>Login</Nav.Link>}
                 </Navbar>
             </div>
         )

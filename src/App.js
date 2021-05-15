@@ -25,6 +25,8 @@ class App extends React.Component {
     const { userId } = this.props.authUser;
     return (
       <BrowserRouter>
+        <AppHeader>
+        </AppHeader>
         <Switch>
           <Route path="/login" component={Login} />
           <Route component={(state) => {
@@ -39,17 +41,17 @@ class App extends React.Component {
             } */
             return !userId ? <Redirect to="/login" /> : (//
               <div>
-                <AppHeader>
-                </AppHeader>
-                <Route path="/home" component={Home} />
-                <Route exact path="/" component={Home} />
-                <Route path="/view-question" component={AnswerQuestion} />
-                <Route path="/question" component={SummaryQuestion} />
-                <Route path="/question/add" component={AddQuestion} />
+                <Switch>
+                  <Route path="/home" component={Home} />
+                  <Route exact path="/" component={Home} />
+                  <Route path="/view-question" component={AnswerQuestion} />
+                  <Route path="/question" component={SummaryQuestion} />
+                  <Route path="/add" component={AddQuestion} />
+                  <Route path='*' component={NotFound} />
+                </Switch>
               </div >)
           }
           } />
-          <Route path='*' component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
