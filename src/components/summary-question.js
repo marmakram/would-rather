@@ -20,17 +20,13 @@ class SummaryQuestion extends React.Component {
                 <div className="col-md-10">
                     <div><span className="name">{this.props.users[quest.author].name + " "}</span> 
                      asks would you rather ..  </div>
-                    <div style={{ textAlign: 'start' }}>
-                        <p> 
+                    <div style={{ textAlign: 'start', margin: 20 }}>
                           <ProgressBar now={opRatio1} label={`${opRatio1}%`} />
                             {quest.optionOne.text}
-                        </p>
                     </div>
-                    <div style={{ textAlign: 'start' }}>
-                    <p> 
+                    <div style={{ textAlign: 'start', margin: 20 }}>
                           <ProgressBar now={opRatio2} label={`${opRatio2}%`} />
                             {quest.optionTwo.text}
-                        </p>
                     </div>
                     <button style={{ maxWidth: 200 }} className="btn btn-primary"
                         onClick={(e) => this.handleAnser()}>Close</button>

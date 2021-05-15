@@ -1,4 +1,4 @@
-import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react'
 import AppHeader from './components/app-header';
@@ -11,7 +11,7 @@ import SummaryQuestion from './components/summary-question';
 import AddQuestion from './components/new-question';
 import NotFound from './components/not-found';
 import { _getUsers, _getQuestions } from './_DATA';
-
+import { PrivateRoute } from './common/PrivateRoute';
 import { RECEIVE_DATA } from './constants'
 
 
@@ -29,29 +29,12 @@ class App extends React.Component {
         </AppHeader>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route component={(state) => {
-            /* let v = ['/', '/home', '/view-question', '/question', '/question/add']
-              .filter(z => z === state.location.pathname);
-            if (v.length <= 0) {
-              return <div>
-                <AppHeader>
-                </AppHeader>
-                <Route path='*' component={NotFound} />
-              </div>
-            } */
-            return !userId ? <Redirect to="/login" /> : (//
-              <div>
-                <Switch>
-                  <Route path="/home" component={Home} />
-                  <Route exact path="/" component={Home} />
-                  <Route path="/view-question" component={AnswerQuestion} />
-                  <Route path="/question" component={SummaryQuestion} />
-                  <Route path="/add" component={AddQuestion} />
-                  <Route path='*' component={NotFound} />
-                </Switch>
-              </div >)
-          }
-          } />
+          <PrivateRoute authUser={userId} path="/home" component={Home} />
+          <PrivateRoute authUser={userId} exact path="/" component={Home} />
+          <PrivateRoute authUser={userId} path="/view-question" component={AnswerQuestion} />
+          <PrivateRoute authUser={userId} path="/question" component={SummaryQuestion} />
+          <PrivateRoute authUser={userId} path="/add" component={AddQuestion} />
+          <Route path='*' component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
