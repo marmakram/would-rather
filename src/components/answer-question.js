@@ -37,21 +37,30 @@ class AnswerQuestion extends React.Component {
     render() {
         const quest = this.props.question;
         console.log("quest,, ", quest);
-        return (<div className="container">
-            <div className="row">
-                <div className="col-md-10">
-                    <div><span className="name">{this.props.users[quest.author].name + " "}</span> 
+        return (<div className="">
+            <div>
+                <div className="row">
+
+                    <div className="col-md-2">
+                        <div className="img" style={{margin: 15,
+                            backgroundImage: 'url("' + this.props.users[quest.author].avatarURL + '")'
+                        }}>
+                        </div>
+                    </div>
+                    <div className="col-md-10">
+                        <div><span className="name">{this.props.users[quest.author].name + " "}</span>
                      asks would you rather ..  </div>
-                    <div style={{ textAlign: 'start' }}>
-                        <input type="radio" value="1" onChange={(e) => this.onChangeValue(e.target.value)} 
-                        name="options" /> {quest.optionOne.text}
+                        <div >
+                            <input type="radio" value="1" onChange={(e) => this.onChangeValue(e.target.value)}
+                                name="options" /> {quest.optionOne.text}
+                        </div>
+                        <div>
+                            <input type="radio" value="2" onChange={(e) => this.onChangeValue(e.target.value)}
+                                name="options" /> {quest.optionTwo.text}
+                        </div>
+                        <button style={{ maxWidth: 200 }} className="btn btn-primary" disabled={!this.state.opt}
+                            onClick={(e) => this.handleAnser()}>Answer</button>
                     </div>
-                    <div style={{ textAlign: 'start' }}>
-                        <input type="radio" value="2" onChange={(e) => this.onChangeValue(e.target.value)}
-                        name="options" /> {quest.optionTwo.text}
-                    </div>
-                    <button style={{ maxWidth: 200 }} className="btn btn-primary" disabled={!this.state.opt}
-                        onClick={(e) => this.handleAnser()}>Answer</button>
                 </div>
             </div>
         </div>

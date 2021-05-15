@@ -16,11 +16,11 @@ class AddQuestion extends React.Component {
             optionOne: {
                 votes: [],
                 text: o,
-              },
-              optionTwo: {
+            },
+            optionTwo: {
                 votes: [],
                 text: t
-              }
+            }
         }
         this.props.dispatch({
             type: ADD_USER_QUESTION,
@@ -33,19 +33,25 @@ class AddQuestion extends React.Component {
     render() {
         return (<div className="container">
             <div className="row">
+                <div className="col-md-2">
+                    <div className="img" style={{
+                        backgroundImage: 'url("' + this.props.user.avatarURL + '")'
+                    }}>
+                    </div>
+                </div>
                 <div className="col-md-10">
                     <div><span className="name">{this.props.user.name + " "}</span>
                      asks would you rather ..  </div>
                     <div style={{ textAlign: 'start' }}>
                         <p>
-                            <input type="text" className="form-control" onChange={(c) => this.setState({op1: c.target.value})}
-                             placeholder="option 1" />
+                            <input type="text" className="textInput form-control" onChange={(c) => this.setState({ op1: c.target.value })}
+                                placeholder="option 1" />
                         </p>
                     </div>
                     <div style={{ textAlign: 'start' }}>
                         <p>
-                            <input type="text" className="form-control" onChange={(c) => this.setState({op2: c.target.value})}
-                             placeholder="option 2" />
+                            <input type="text" className="textInput form-control" onChange={(c) => this.setState({ op2: c.target.value })}
+                                placeholder="option 2" />
                         </p>
                     </div>
                     <button style={{ maxWidth: 200 }} className="btn btn-primary"

@@ -28,7 +28,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route component={(state) => {
-            let v = ['/', '/home', '/view-question', '/question', '/question/add']
+            /* let v = ['/', '/home', '/view-question', '/question', '/question/add']
               .filter(z => z === state.location.pathname);
             if (v.length <= 0) {
               return <div>
@@ -36,7 +36,7 @@ class App extends React.Component {
                 </AppHeader>
                 <Route path='*' component={NotFound} />
               </div>
-            }
+            } */
             return !userId ? <Redirect to="/login" /> : (//
               <div>
                 <AppHeader>
@@ -46,11 +46,10 @@ class App extends React.Component {
                 <Route path="/view-question" component={AnswerQuestion} />
                 <Route path="/question" component={SummaryQuestion} />
                 <Route path="/question/add" component={AddQuestion} />
-                <Route path='*' component={NotFound} />
               </div >)
           }
           } />
-          {/* */}
+          <Route path='*' component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
