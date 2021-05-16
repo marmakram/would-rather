@@ -25,7 +25,6 @@ code {
 }
 
 
-/* Full-width inputs */
 .inputLog {
   width: 100%;
   padding: 12px 20px;
@@ -77,4 +76,7 @@ h1 {
 
 .textInput {
   width: 700px;
+}
+.btnMax {
+  max-width: 200
 }

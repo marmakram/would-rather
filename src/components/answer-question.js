@@ -7,7 +7,7 @@ class AnswerQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionId: props.location.state.questionId
+            questionId: props.questionId
         }
     }
 
@@ -19,30 +19,44 @@ class AnswerQuestion extends React.Component {
 
     handleAnser() {
         let op = this.state.opt;
-        if (op === "1")
+        let ans = {};
+        ans[this.props.question.id] = 'optionOne'
+        if (op === "1") {
             this.props.question.optionOne.votes.push(this.props.userId)
-        if (op === "2")
+            ans[this.props.question.id] = 'optionOne'
+        }
+        if (op === "2") {
             this.props.question.optionTwo.votes.push(this.props.userId)
-
+            ans[this.props.question.id] = 'optionTwo'
+        }
         let q = { ...this.props.question };
 
         this.props.dispatch({
             type: ANSWER_QUESTION,
             question: q,
-            Id: this.state.questionId
+            Id: this.state.questionId,
+            answer: ans,
+            userId: this.props.userId
         })
         this.props.history.push({ pathname: "/" })
     }
-
+    componentDidMount() {
+        let questionId = this.props.match.params.question_id;
+        if (this.props.history !== undefined &&
+        (this.props.question === undefined || questionId === null || questionId === undefined)) {
+            this.props.history.push({ pathname: "/404" })
+        }
+    }
     render() {
         const quest = this.props.question;
-        console.log("quest,, ", quest);
+        if (quest === undefined) return <div></div>;
         return (<div className="">
             <div>
                 <div className="row">
 
                     <div className="col-md-2">
-                        <div className="img" style={{margin: 15,
+                        <div className="img" style={{
+                            margin: 15,
                             backgroundImage: 'url("' + this.props.users[quest.author].avatarURL + '")'
                         }}>
                         </div>
@@ -58,7 +72,7 @@ class AnswerQuestion extends React.Component {
                             <input type="radio" value="2" onChange={(e) => this.onChangeValue(e.target.value)}
                                 name="options" /> {quest.optionTwo.text}
                         </div>
-                        <button style={{ maxWidth: 200 }} className="btn btn-primary" disabled={!this.state.opt}
+                        <button className="btnMax btn btn-primary" disabled={!this.state.opt}
                             onClick={(e) => this.handleAnser()}>Answer</button>
                     </div>
                 </div>
@@ -70,7 +84,9 @@ class AnswerQuestion extends React.Component {
 
 function mapStateToProps(state, props) {
     let { questionsReducer, authUserReducer, users } = state;
-    let questionId = props.location.state.questionId;
+    debugger
+    console.log("this.props.match ", props.match)
+    let questionId = props.match.params['question_id']//location.state.questionId;
     const questions = questionsReducer;
 
     const { userId } = authUserReducer;
@@ -79,6 +95,7 @@ function mapStateToProps(state, props) {
     return {
         userId,
         users,
+        questionId,
         question: questions[questionId]
     }
 }

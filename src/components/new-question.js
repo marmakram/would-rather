@@ -25,7 +25,8 @@ class AddQuestion extends React.Component {
         this.props.dispatch({
             type: ADD_USER_QUESTION,
             question: q,
-            questionId: id
+            questionId: id,
+            userId: this.props.userId
         })
         this.props.history.push({ pathname: "/" })
     }
@@ -54,7 +55,7 @@ class AddQuestion extends React.Component {
                                 placeholder="option 2" />
                         </p>
                     </div>
-                    <button style={{ maxWidth: 200 }} className="btn btn-primary"
+                    <button className="btnMax btn btn-primary"
                         onClick={(e) => this.handleAnser()}>Add</button>
                 </div>
             </div>

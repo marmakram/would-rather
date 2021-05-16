@@ -2,9 +2,7 @@
 import { connect } from 'react-redux';
 import { Tab, Tabs } from 'react-bootstrap'
 import QuestionList from './question-list'
-
-/* 
-create 2 tabs */
+import mapStateWithSelectToProps from '../selectors/home-selector'
 
 import React from 'react';
 
@@ -15,12 +13,6 @@ class Home extends React.Component {
     }
     handleUnanswred(e, q) {
         e.history.push({ pathname: "/view-question/" + q, state: { questionId: q } })
-        /* return (<Redirect push
-            to={{
-                pathname: "/view-question",
-                state: { questionId: e }
-            }}
-        />); */
     }
 
     render() {
@@ -39,7 +31,7 @@ class Home extends React.Component {
     }
 }
 
-function mapStateToProps({ questionsReducer, authUserReducer, users }) {
+ function mapStateToProps({ questionsReducer, authUserReducer, users }) {
     console.log("Comp home, mapStateToProps,, ", { questionsReducer, authUserReducer });
     const questions = questionsReducer;
     const { userId } = authUserReducer;
@@ -65,5 +57,5 @@ function mapStateToProps({ questionsReducer, authUserReducer, users }) {
         unanswered,
         users
     }
-}
-export default connect(mapStateToProps)(Home)
+} 
+export default connect(mapStateWithSelectToProps)(Home)

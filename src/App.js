@@ -8,8 +8,9 @@ import AnswerQuestion from './components/answer-question';
 import Login from './components/login';
 import Home from './components/home';
 import SummaryQuestion from './components/summary-question';
+import Leaderboard from './components/leaderboard'
 import AddQuestion from './components/new-question';
-import NotFound from './components/not-found';
+import NotFound from './common/not-found';
 import { _getUsers, _getQuestions } from './_DATA';
 import { PrivateRoute } from './common/PrivateRoute';
 import { RECEIVE_DATA } from './constants'
@@ -29,11 +30,13 @@ class App extends React.Component {
         </AppHeader>
         <Switch>
           <Route path="/login" component={Login} />
+          <PrivateRoute authUser={userId} path="/leaderboard" component={Leaderboard} />
           <PrivateRoute authUser={userId} path="/home" component={Home} />
           <PrivateRoute authUser={userId} exact path="/" component={Home} />
-          <PrivateRoute authUser={userId} path="/view-question" component={AnswerQuestion} />
-          <PrivateRoute authUser={userId} path="/question" component={SummaryQuestion} />
+          <PrivateRoute authUser={userId} path="/view-question/:question_id" component={AnswerQuestion} />
+          <PrivateRoute authUser={userId} path="/question/:question_id" component={SummaryQuestion} />
           <PrivateRoute authUser={userId} path="/add" component={AddQuestion} />
+          <Route path='/404' component={NotFound} />
           <Route path='*' component={NotFound} />
         </Switch>
       </BrowserRouter>

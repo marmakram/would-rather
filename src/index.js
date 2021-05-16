@@ -14,13 +14,6 @@ import questionsReducer from './reducers/question-reducer';
 import authUserReducer from './reducers/auth-user-reducer';
 import thunk from 'redux-thunk'
 
-/* const checker = (store) => (next) => (action) => {
-  if (!store.userId) {
-    return <Redirect push to="/login" />
-  }
-  console.log("inside checker middleware ", store.userId);
-  return next(action)
-} */
 
 const logger = (store) => (next) => (action) => {
   console.group(action.type)
@@ -39,9 +32,7 @@ const store = createStore(combineReducers({
 
 ReactDOM.render(
   <Provider store={store}>
-    
       <App />
-    {/* <React.StrictMode></React.StrictMode> */}
   </Provider>,
   document.getElementById('root')
 );

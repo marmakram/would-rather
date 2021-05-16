@@ -1,33 +1,19 @@
-import {RECEIVE_DATA} from '../constants';
+import {RECEIVE_DATA, ANSWER_QUESTION, ADD_USER_QUESTION} from '../constants';
 
 export default function users(state = {}, action){
   
     switch(action.type){
-      /* case USER_ANSWER_QUESTION:
-        return {
-          ...state,
-          [action.auth]: {
-            ...state[action.auth],
-            answers: {
-              ...state[action.auth].answers,
-              [action.qid]: action.option
-            }
-          }
-        };
-       */
+      case ANSWER_QUESTION:
+          state[action.userId].answers ={...state[action.userId].answers, ...action.answer}
+          return state;
       case RECEIVE_DATA:
         return {
           ...state,
           ...action.users
         };
-      /* case ADD_USER_QUESTION :
-        return {
-          ...state,
-          [action.authedUser]: {
-            ...state[action.authedUser],
-            questions: state[action.authedUser].questions.concat([action.qid])
-          }
-        }; */
+        case ADD_USER_QUESTION:
+          state[action.userId].questions.push(action.questionId)
+          return state;
       default:
         return state
     }
