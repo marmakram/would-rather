@@ -8,7 +8,6 @@ const usersFilter = (state) => state.users
 const homeSelector = createSelector(
     [ questionsFilter, usersFilter, auth ],
     (questions, users, user) => {
-        debugger
         let userId = user.userId
         let unanswered = Object.keys(questions).filter(a => {
             if (questions[a].optionOne.votes.filter(v1 => v1 === userId).length > 0)
@@ -25,8 +24,7 @@ const homeSelector = createSelector(
             return true;
         }).map(a => questions[a])
         .sort(function(a, b){return b.timestamp-a.timestamp});
-        console.log('unanswered ', unanswered);
-        console.log('answered ', answered);
+
         return {
             answered,
             unanswered,

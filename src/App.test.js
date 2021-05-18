@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -9,7 +10,7 @@ import authUserReducer from './reducers/auth-user-reducer';
 import thunk from 'redux-thunk'
 
 import Login from './components/login';
-import AnswerQuestion from './components/answer-question';
+import QuestionDetail from './components/question-detail';
 
 let store = createStore(combineReducers({
   users,
@@ -34,5 +35,7 @@ test('renders without crashing', () => {
   params['question_id']='am8ehyc8byjqgar0jgpub9'
   
   passing['params'] =params
-  render(<AnswerQuestion store={store} match={passing} />);
+  render(<Provider store={store}><BrowserRouter>
+    <QuestionDetail match={passing} />
+  </BrowserRouter></Provider>);
 });

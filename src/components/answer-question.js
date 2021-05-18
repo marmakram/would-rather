@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ANSWER_QUESTION } from '../constants'
 
@@ -40,13 +41,15 @@ class AnswerQuestion extends React.Component {
         })
         this.props.history.push({ pathname: "/" })
     }
+
     componentDidMount() {
-        let questionId = this.props.match.params.question_id;
+        let questionId = this.props.questionId;
         if (this.props.history !== undefined &&
         (this.props.question === undefined || questionId === null || questionId === undefined)) {
             this.props.history.push({ pathname: "/404" })
         }
     }
+
     render() {
         const quest = this.props.question;
         if (quest === undefined) return <div></div>;
@@ -61,7 +64,7 @@ class AnswerQuestion extends React.Component {
                         }}>
                         </div>
                     </div>
-                    <div className="col-md-10">
+                    <div className="col-md-9">
                         <div><span className="name">{this.props.users[quest.author].name + " "}</span>
                      asks would you rather ..  </div>
                         <div >
@@ -84,13 +87,10 @@ class AnswerQuestion extends React.Component {
 
 function mapStateToProps(state, props) {
     let { questionsReducer, authUserReducer, users } = state;
-    debugger
-    console.log("this.props.match ", props.match)
-    let questionId = props.match.params['question_id']//location.state.questionId;
+    let questionId = props.questionId//.match.params['question_id']//location.state.questionId;
     const questions = questionsReducer;
 
     const { userId } = authUserReducer;
-    console.log("quest,, ", questionId, questions[questionId]);
 
     return {
         userId,
@@ -99,4 +99,4 @@ function mapStateToProps(state, props) {
         question: questions[questionId]
     }
 }
-export default connect(mapStateToProps)(AnswerQuestion)
+export default withRouter(connect(mapStateToProps)(AnswerQuestion))

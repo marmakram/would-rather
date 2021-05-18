@@ -18,7 +18,6 @@ class AppHeader extends React.Component {
         debugger
     }
     render() {
-        console.log(this.props.currUser);
         return (
             <div>
                 <Navbar bg="light" expand="lg">
@@ -49,7 +48,6 @@ class AppHeader extends React.Component {
 }
 
 function mapStateToProps({ users, authUserReducer }) {
-    console.log("Comp app header, mapStateToProps,, ", { users, authUserReducer });
     let currUser = authUserReducer.userId ? users[authUserReducer.userId] : null
     return {
         authUser: authUserReducer,

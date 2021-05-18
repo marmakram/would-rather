@@ -9,7 +9,7 @@ class SummaryQuestion extends React.Component {
         this.props.history.push({ pathname: "/" })
     }
     componentDidMount() {
-        let questionId = this.props.match.params.question_id;
+        let questionId = this.props.questionId//match.params.question_id;
         if (this.props.questions === undefined || questionId === null || questionId === undefined) {
             this.props.history.push({ pathname: "/404" })
         }
@@ -64,9 +64,8 @@ class SummaryQuestion extends React.Component {
 
 function mapStateToProps(state, props) {
     let { questionsReducer, authUserReducer, users } = state;
-    let questionId = props.match.params.question_id;
+    let questionId = props.questionId//match.params.question_id;
     const questions = questionsReducer;
-    console.log("quest,, ");
 
     return {
         authUser: authUserReducer,

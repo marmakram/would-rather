@@ -28,10 +28,6 @@ class Login extends React.Component {
         }
     }
 
-    componentDidMount() {
-        let loc = this.props.location;
-        console.log("Location ", loc);
-    }
     render() {
         const { users } = this.props;
         return (
@@ -56,7 +52,6 @@ class Login extends React.Component {
 }
 
 function mapStateToProps({ users }) {
-    console.log("Comp login, mapStateToProps,, ", { users });
     return {
         users
     }

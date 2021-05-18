@@ -40,7 +40,7 @@ class AddQuestion extends React.Component {
                     }}>
                     </div>
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-9">
                     <div><span className="name">{this.props.user.name + " "}</span>
                      asks would you rather ..  </div>
                     <div style={{ textAlign: 'start' }}>

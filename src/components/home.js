@@ -9,10 +9,7 @@ import React from 'react';
 class Home extends React.Component {
 
     handleanswred(e, q) {
-        e.history.push({ pathname: "/question/" + q, state: { questionId: q } })
-    }
-    handleUnanswred(e, q) {
-        e.history.push({ pathname: "/view-question/" + q, state: { questionId: q } })
+        e.history.push({ pathname: "/questions/" + q, state: { questionId: q } })
     }
 
     render() {
@@ -21,7 +18,7 @@ class Home extends React.Component {
                 <h1>Leaderboard</h1>
                 <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example">
                     <Tab eventKey="unanswered" title={"Unanswered Questions  ( " + this.props.unanswered.length + " )"}>
-                        {<QuestionList handleView={this.handleUnanswred} questions={this.props.unanswered} users={this.props.users} ></QuestionList>}
+                        {<QuestionList handleView={this.handleanswred} questions={this.props.unanswered} users={this.props.users} ></QuestionList>}
                     </Tab>
                     <Tab eventKey="answered" title={"Answered Questions  ( " + this.props.answered.length+ " )"}>
                         {<QuestionList handleView={this.handleanswred} questions={this.props.answered} users={this.props.users}></QuestionList>}
@@ -32,7 +29,6 @@ class Home extends React.Component {
 }
 
  function mapStateToProps({ questionsReducer, authUserReducer, users }) {
-    console.log("Comp home, mapStateToProps,, ", { questionsReducer, authUserReducer });
     const questions = questionsReducer;
     const { userId } = authUserReducer;
     let unanswered = Object.keys(questions).filter(a => {
@@ -50,8 +46,6 @@ class Home extends React.Component {
         return true;
     }).map(a => questions[a])
     .sort(function(a, b){return b.timestamp-a.timestamp});
-    console.log('unanswered ', unanswered);
-    console.log('answered ', answered);
     return {
         answered,
         unanswered,

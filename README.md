@@ -2,9 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Description
+
+"Would you rather" allows users to ask their questions, and answer their questions and others questions and see the results of answered questions.
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install the all dependencies based on pakage.json file
 
 ### `npm start`
 
